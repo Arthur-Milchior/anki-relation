@@ -4,14 +4,10 @@
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 # Source in https://github.com/Arthur-Milchior/anki-relation
 
-from main import mw
+from aqt import mw
 
 userOption = mw.addonManager.getConfig(__name__)
-current_tag_prefix = userOption["current tag prefix"]
-tag_prefixes = userOption["tag prefixes"]
-query_relation_name = userOption["query relation name"]
-if current_tag_prefix not in tag_prefixes:
-    tag_prefixes.append(current_tag_prefix)
-    userOption["tag prefixes"]= tag_prefixes
+if userOption["current tag prefix"] not in userOption["tag prefixes"]:
+    userOption["tag prefixes"].append(userOption["current tag prefix"])
+    userOption["tag prefixes"]= userOption["tag prefixes"]
     mw.addonManager.writeConfig(__name__,userOption)
-    
