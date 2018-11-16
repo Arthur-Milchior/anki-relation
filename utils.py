@@ -62,22 +62,22 @@ def queryRelated(relations):
     debug(f"Query from relations {relations} is {query}")
     return query 
 
-def getNidFromRelation(relation):
-    nid=getNidFromRelation([relation])
+def getNidsFromRelation(relation):
+    nids=getNidsFromRelations([relation])
     debug(f"from relation {relation} we get nids {nids}")
     return  nids
 def getNotesFromRelation(relation):
-    notes={Note(mw.col, id=nid) for nid in getNidFromRelation(relation)}
+    notes={Note(mw.col, id=nid) for nid in getNidsFromRelation(relation)}
     debug(f"from relation {relation} we get notes {notes}")
     return nids
 
-def getNidFromRelations(relations):
+def getNidsFromRelations(relations):
     finder = Finder(mw.col)
     nids= set(finder.findNotes(queryRelated(relations)))
     debug(f"from relations {relations} we get nids {nids}")
     return nids
 def getNotesFromRelations(relations):
-    notes={Note(mw.col, id=nid) for nid in getNidFromRelations(relations)}
+    notes={Note(mw.col, id=nid) for nid in getNidsFromRelations(relations)}
     debug(f"from relations {relations} we get notes {notes}")
     return notes
 

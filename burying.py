@@ -22,7 +22,7 @@ def _burySiblings(self, card):
         relations=note.getRelations()
         nids = {card.nid}
         for relation in relations:
-            nids|= getNotesIDFromRelation(relation)
+            nids|= getNidsFromRelation(relation)
         # loop through and remove from queues
         query=f"""
         select id, queue from cards where (nid in {ids2str(nids)}) and id!={card.id}

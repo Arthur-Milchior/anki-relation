@@ -6,11 +6,11 @@ Initially requested on https://www.reddit.com/r/Anki/comments/9vjnpv/addon_idea_
 
 Allow to create a new of relations between notes. Burying sibling cards will now also bury cards of related note. This only work on computer, not on ios, android or ankiweb.
 
-To «relate» notes, in the browser, select each note you want in your new relation, and then press Ctrl+m (or notes>create a relation). A new relation will be created.
+To «relate» notes, in the browser, select each note you want in your new relation, and then press Ctrl+Alt+E (or edit>create a relation). A new relation will be created.
 
 To delete a relation r, just delete the tag relation_r.
 
-To see all cards related to some note, select this note in the browser, and do (note>see related notes), or Ctrl+r.
+To see all cards related to some note, select this note in the browser, and do (edit>see related notes), or Ctrl+Alt+Shift+E.
 
 ##Notes in multiple relations
 A note may belong to multiple relation. If a card of this note is seen, all cards of all of its relations will be buried. If you select a card belonging to three relations and then click on merge, the three relations will be merged.
