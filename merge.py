@@ -4,14 +4,14 @@
 # License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 # Source in https://github.com/Arthur-Milchior/anki-relation
 
-from .utils import *
+from .utils import createRelationName, getRelationsFromNotes, getNotesFromRelations, getSelectedNotes, debug
 from aqt.utils import tooltip
 
 def createRelationBrowser(browser,relation=None):
     notes = getSelectedNotes(browser)
-    createRelation(notes,relation)
+    createRelation(notes,browser,relation)
     
-def createRelation(notes,relation=None):
+def createRelation(notes,browser, relation=None):
     """Create a new relation over those notes. """
     debug(f"Calling createRelations on {notes}")
     l=len(notes)
@@ -20,7 +20,11 @@ def createRelation(notes,relation=None):
     # if l==1:
     #     tooltip(f"You selected a single note, no relation created")
     #     return
-    relation=createRelationName() if relation is None else relation
+    if relation is None:
+        relation=createRelationName(browser)
+    if relation is None: #i.e. createRelationName returned None
+        tooltip(f"No relation created.")
+        return
     for note in notes:
         debug(f"Adding relation {relation} to note {note.id}")
         note.addTag(relation)
@@ -35,7 +39,7 @@ def addNotesToRelations(notes):
     l=len(relations)
     if l==1:
         relation=relations.pop()
-        createRelation(notes,relation=relation)
+        createRelation(notes,browser,relation=relation)
         debug(f"A single relation is present in {notes}. All of their cards will be added to it.")
         return True
     elif l==0:
@@ -55,11 +59,11 @@ def mergeRelations(browser):
     relatedNotes = selectedNotes|getNotesFromRelations(relations)
     if len(relations)==1:
         debug(f"A single relation was found while merging {selectedNotes}, thus we add notes to it.")
-        createRelation(selectedNotes,relation=relations.pop() )
+        createRelation(selectedNotes,browser,relation=relations.pop() )
         return
     debug(f"0 or many relation(s) was(were) found while merging {selectedNotes}, thus we delete those relations and create a new one..")
     for note in relatedNotes:
         for relation in relations:
             note.delTag(relation)
-    createRelation(relatedNotes)
+    createRelation(relatedNotes,browser)
 

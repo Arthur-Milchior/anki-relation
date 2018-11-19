@@ -8,7 +8,7 @@
 #from anki/sched.py
 from anki.utils import ids2str, intTime
 from anki.sched import Scheduler
-from .utils import *
+from .utils import getNidsFromRelation
 
 def _burySiblings(self, card):
         """Also bury related cards"""

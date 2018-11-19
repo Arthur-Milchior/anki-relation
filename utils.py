@@ -5,7 +5,7 @@
 # Source in https://github.com/Arthur-Milchior/anki-relation
 
 from .config import userOption
-from aqt.utils import getOnlyText
+from aqt.utils import getOnlyText, askUser
 from anki.utils import intTime
 from anki.find import Finder
 from anki.notes import Note
@@ -47,13 +47,27 @@ def getRelationsFromNotes(notes):
     debug(f"The relations from notes {notes} are {relations}")
     return relations
         
-def createRelationName():
-    """A tag, from current prefix and an id.
+def createRelationName(browser):
+    """A tag, from current prefix and an id. Or None
 
-    Id is either a time stamp or asked to user"""
+    Id is either a time stamp or asked to user.
+    None if the user cancel.
+    """
     timeId=str(intTime(1000))
-    suffix=getOnlyText(_("Name of the relation:"), default=timeId) if userOption["query relation name"] else timeId
-    relation = userOption["current tag prefix"]+suffix
+    while True:
+        if userOption["query relation name"]:
+            suffix=getOnlyText(_("Name of the relation:"), default=timeId)
+            if suffix=="":
+                return None
+        else:
+            suffix=timeId
+        relation = userOption["current tag prefix"]+suffix
+        if len(getNidsFromRelation(relation))>0:
+            confirm= askUser(f"A relation called {relation} already exists. Do you want to add the selected notes to this relation ?", defaultno=True, parent=browser)
+            if confirm is True:
+                break
+        else:
+            break
     debug(f"The new relation name is {relation}")
     return relation
 
@@ -66,6 +80,7 @@ def getNidsFromRelation(relation):
     nids=getNidsFromRelations([relation])
     debug(f"from relation {relation} we get nids {nids}")
     return  nids
+
 def getNotesFromRelation(relation):
     notes={Note(mw.col, id=nid) for nid in getNidsFromRelation(relation)}
     debug(f"from relation {relation} we get notes {notes}")

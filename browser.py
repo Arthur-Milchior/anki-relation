@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
 from . import merge
-from .utils import *
+from .utils import getRelationsFromNotes, queryRelated, getSelectedNotes
 from anki.hooks import addHook
 import aqt
 
@@ -21,18 +21,15 @@ def searchRelatedNotesInBrowser(browser):
     searchRelationsInBrowser(getRelationsFromNotes(getSelectedNotes(browser)))
 
 def setupMenu(browser):
-    for (shortcut, text, function) in [
-            ("Ctrl+Shift+Alt+E","See related notes",searchRelatedNotesInBrowser),
-            ("Ctrl+Alt+E","Create a relation",merge.createRelation),
-            #(None,"Merge the selected relations",merge.mergeRelations),
-    ]:
-        a=QAction(text,browser)
-        a.setShortcut(QKeySequence(shortcut))
-        a.triggered.connect(lambda function=function: function(browser))
+        a=QAction("See related notes",browser)
+        a.setShortcut(QKeySequence("Ctrl+Shift+Alt+E"))
+        a.triggered.connect(lambda : searchRelatedNotesInBrowser(browser))
         browser.form.menuEdit.addAction(a)
-        
-        # a=QAction("Merge the selected relations/notes",browser)
-        # a.triggered.connect(lambda: merge.mergeRelations(browser))
-        # browser.form.menuEdit.addAction(a)
+
+        a=QAction("Create a relation",browser)
+        a.setShortcut(QKeySequence("Ctrl+Alt+E"))
+        a.triggered.connect(lambda :merge.createRelationBrowser(browser))
+        browser.form.menuEdit.addAction(a)
+
 addHook("browser.setupMenus", setupMenu)
 
