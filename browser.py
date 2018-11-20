@@ -14,7 +14,7 @@ from anki.hooks import addHook
 import aqt
 
 def searchRelationsInBrowser(relations):
-    browser = aqt.dialogs.open("Browser", mw)
+    browser = aqt.dialogs.open("Browser", aqt.mw)
     browser.form.searchEdit.lineEdit().setText(queryRelated(relations))
     browser.onSearchActivated()
 
