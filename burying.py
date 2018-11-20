@@ -5,13 +5,15 @@
 # Source in https://github.com/Arthur-Milchior/anki-relation
 # Addon number 413416269  https://ankiweb.net/shared/info/413416269
 
-#from anki/sched.py
+#from  anki/sched.py  and anki/schedv2.py 
 from anki.utils import ids2str, intTime
 from anki.sched import Scheduler
+from anki.sched import Scheduler as Scheduler2
 from .utils import getNidsFromRelation, debug
 
-def _burySiblings(self, card):
+def _burySiblingsAux(self, card,V1):
         """Also bury related cards"""
+        debug(f"calling _burySiblings({card})")
         toBury = []
         nconf = self._newConf(card)
         buryNew = nconf.get("bury", True)
@@ -50,11 +52,15 @@ def _burySiblings(self, card):
         # then bury
         if toBury:
             print(f"Burying {toBury}")
-            self.col.db.execute(
-                "update cards set queue=-2,mod=?,usn=? where id in "+ids2str(toBury),
-                intTime(), self.col.usn())
-            self.col.log(toBury)
+            if V1:
+                    self.col.db.execute(
+                            "update cards set queue=-2,mod=?,usn=? where id in "+ids2str(toBury),
+                            intTime(), self.col.usn())
+                    self.col.log(toBury)
+            else:#V2
+                    self.buryCards(toBury, manual=False)
+                    
         else:
             print("nothing to bury")
-
-Scheduler._burySiblings=_burySiblings
+Scheduler._burySiblings=(lambda self,card: _burySiblingsAux(self, card,True))
+Scheduler2._burySiblings=(lambda self,card: _burySiblingsAux(self, card,False))
