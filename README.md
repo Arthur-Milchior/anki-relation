@@ -1,10 +1,3 @@
-*Copyright: Arthur Milchior <arthur@milchior.fr>
-*Based on anki code by Damien Elmes <anki@ichi2.net>
-*License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
-*Source in https://github.com/Arthur-Milchior/anki-relation
-*Initially requested on https://www.reddit.com/r/Anki/comments/9vjnpv/addon_idea_manually_marking_notes_as_related/
-*Addon number 413416269  https://ankiweb.net/shared/info/413416269
-
 Allow to create a new of relations between notes. Burying sibling cards will now also bury cards of related note. This only work on computer, not on ios, android or ankiweb.
 
 To «relate» notes, in the browser, select each note you want in your new relation, and then press Ctrl+Alt+E (or edit>create a relation). A new relation will be created.
@@ -32,3 +25,12 @@ Add an option to add a single card to a relation, instead of an entire note.
 
 If you want to merge multiple relations into a single one, select at least one note from each relation and click on (note >merge the selected relations). If a note has no relation, it will just be added to this new relation.
 
+Key         |Value
+------------|-------------------------------------------------------------------
+Copyright   |Arthur Milchior <arthur@milchior.fr>
+Based on    |Anki code by Damien Elmes <anki@ichi2.net>
+License     |GNU AGPL, version 3 or later; http|//www.gnu.org/licenses/agpl.html
+Source in   | https://github.com/Arthur-Milchior/anki-relation
+Addon number| [413416269](https://ankiweb.net/shared/info/413416269)
+Initially requested|https://www.reddit.com/r/Anki/comments/9vjnpv/addon_idea_manually_marking_notes_as_related/
+Debugged by |cjdduarte
