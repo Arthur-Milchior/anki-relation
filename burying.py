@@ -8,12 +8,12 @@
 #from  anki/sched.py  and anki/schedv2.py 
 from anki.utils import ids2str, intTime
 from anki.sched import Scheduler
-from anki.sched import Scheduler as Scheduler2
+from anki.schedv2 import Scheduler as Scheduler2
 from .utils import getNidsFromRelation, debug
 
 def _burySiblingsAux(self, card,V1):
         """Also bury related cards"""
-        debug(f"calling _burySiblings({card})")
+        debug(f"calling _burySiblings({card},{V1})\n")
         toBury = []
         nconf = self._newConf(card)
         buryNew = nconf.get("bury", True)
