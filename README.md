@@ -27,7 +27,7 @@ Add an option to add a single card to a relation, instead of an entire note.
 
 If you want to merge multiple relations into a single one, select at least one note from each relation and click on (note >merge the selected relations). If a note has no relation, it will just be added to this new relation.
 
-##Links, licence and credits
+## Links, licence and credits
 
 Key|Value
 ---|---
