@@ -1,9 +1,11 @@
-|Copyright| Arthur Milchior <arthur@milchior.fr>|
-|Based on anki code by Damien Elmes <anki@ichi2.net>|
-|License| GNU AGPL, version 3 or later; http|//www.gnu.org/licenses/agpl.html|
-|Source in https|//github.com/Arthur-Milchior/anki-relation|
-|Initially requested on| https://www.reddit.com/r/Anki/comments/9vjnpv/addon_idea_manually_marking_notes_as_related/|
-|Addon number| 413416269  https://ankiweb.net/shared/info/413416269
+Key|Value
+---|---
+Copyright| Arthur Milchior <arthur@milchior.fr>
+Based on anki code by Damien Elmes <anki@ichi2.net>
+License| GNU AGPL, version 3 or later; http|//www.gnu.org/licenses/agpl.html
+Source in https|//github.com/Arthur-Milchior/anki-relation
+Initially requested on| https://www.reddit.com/r/Anki/comments/9vjnpv/addon_idea_manually_marking_notes_as_related/
+Addon number| 413416269  https://ankiweb.net/shared/info/413416269
 
 Allow to create a new of relations between notes. Burying sibling cards will now also bury cards of related note. This only work on computer, not on ios, android or ankiweb.
 
