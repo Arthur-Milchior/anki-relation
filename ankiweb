@@ -1,0 +1,3 @@
+Allow to create a new kind of relations between notes. Burying sibling cards will now also bury cards of related note. This only work on computer, not on ios, android or ankiweb.
+
+For more information, please go to https://github.com/Arthur-Milchior/anki-relation
