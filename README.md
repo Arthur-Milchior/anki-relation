@@ -1,4 +1,4 @@
-Allow to create a new of relations between notes. Burying sibling cards will now also bury cards of related note. This only work on computer, not on ios, android or ankiweb.
+Allow to create a new kind of relations between notes. Burying sibling cards will now also bury cards of related note. This only work on computer, not on ios, android or ankiweb.
 
 To «relate» notes, in the browser, select each note you want in your new relation, and then press Ctrl+Alt+E (or edit>create a relation). A new relation will be created.
 
@@ -32,5 +32,6 @@ Based on    |Anki code by Damien Elmes <anki@ichi2.net>
 License     |GNU AGPL, version 3 or later; http|//www.gnu.org/licenses/agpl.html
 Source in   | https://github.com/Arthur-Milchior/anki-relation
 Addon number| [413416269](https://ankiweb.net/shared/info/413416269)
-Initially requested|https://www.reddit.com/r/Anki/comments/9vjnpv/addon_idea_manually_marking_notes_as_related/
+Initially requested|h ttps://www.reddit.com/r/Anki/comments/9vjnpv/addon_idea_manually_marking_notes_as_related/
 Debugged by |cjdduarte
+Support me on| [![Ko-fi](https://ko-fi.com/img/Kofi_Logo_Blue.svg)](Ko-fi.com/arthurmilchior) or [![Patreon](http://www.milchior.fr/patreon.png)](https://www.patreon.com/bePatron?u=146206)
