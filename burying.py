@@ -5,11 +5,15 @@
 # Source in https://github.com/Arthur-Milchior/anki-relation
 # Addon number 413416269  https://ankiweb.net/shared/info/413416269
 
-#from  anki/sched.py  and anki/schedv2.py 
+#from  anki/sched.py  and anki/schedv2.py
 from anki.utils import ids2str, intTime
 from anki.sched import Scheduler
 from anki.schedv2 import Scheduler as Scheduler2
 from .utils import getNidsFromRelation, debug
+
+def debug(*args,**kwargs):
+        #print(*args,**kwargs)
+        pass
 
 def _burySiblingsAux(self, card,V1):
         """Also bury related cards"""
@@ -29,7 +33,7 @@ def _burySiblingsAux(self, card,V1):
         query=f"""
         select id, queue from cards where (nid in {ids2str(nids)}) and id!={card.id}
         and (queue=0 or (queue=2 and due<={self.today}))"""#nids instead of nid
-        print(f"query is {query}")
+        debug(f"query is {query}")
         for cid,queue in self.col.db.execute(query):
         ###########
             debug(f"The query retuned {cid}, {queue}")
@@ -51,7 +55,7 @@ def _burySiblingsAux(self, card,V1):
                     pass
         # then bury
         if toBury:
-            print(f"Burying {toBury}")
+            debug(f"Burying {toBury}")
             if V1:
                     self.col.db.execute(
                             "update cards set queue=-2,mod=?,usn=? where id in "+ids2str(toBury),
@@ -59,8 +63,8 @@ def _burySiblingsAux(self, card,V1):
                     self.col.log(toBury)
             else:#V2
                     self.buryCards(toBury, manual=False)
-                    
+
         else:
-            print("nothing to bury")
+            debug("nothing to bury")
 Scheduler._burySiblings=(lambda self,card: _burySiblingsAux(self, card,True))
 Scheduler2._burySiblings=(lambda self,card: _burySiblingsAux(self, card,False))

@@ -6,17 +6,3 @@
 # Addon number 413416269  https://ankiweb.net/shared/info/413416269
 from . import burying
 from . import browser
-
-
-
-# from . import config
-# userOption = config.userOption
-
-# import aqt
-
-
-
-
-    
-
-

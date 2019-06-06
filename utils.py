@@ -5,7 +5,7 @@
 # Source in https://github.com/Arthur-Milchior/anki-relation
 # Addon number 413416269  https://ankiweb.net/shared/info/413416269
 
-from .config import userOption
+from .config import getConfig
 from aqt.utils import getOnlyText, askUser
 from anki.utils import intTime
 from anki.find import Finder
@@ -13,13 +13,13 @@ from anki.notes import Note
 from aqt import mw
 
 def debug(s):
-    print(s)
+    #print(s)
     pass
 
 def getRelationsFromNote(self):
     relations = set()
     for relation in self.tags:
-        for prefix in userOption["tag prefixes"]:
+        for prefix in getConfig("tag prefixes"):
             if relation.startswith(prefix):
                 relations.add(relation)#[len(prefix):])
                 break
@@ -28,12 +28,12 @@ def getRelationsFromNote(self):
 
 def removeRelationsFromNote(self):
     for tag in self.tags:
-        for prefix in userOption["tag prefixes"]:
+        for prefix in getConfig("tag prefixes"):
             if tag.startswith(prefix):
                 self.delTag(tag)
                 debug(f"Removing tag {tag} from note {self.id}")
                 break
-    
+
 
 Note.getRelations=getRelationsFromNote
 Note.removeRelations=removeRelationsFromNote
@@ -47,7 +47,7 @@ def getRelationsFromNotes(notes):
         relations |= note.getRelations()
     debug(f"The relations from notes {notes} are {relations}")
     return relations
-        
+
 def createRelationName(browser):
     """A tag, from current prefix and an id. Or None
 
@@ -56,13 +56,13 @@ def createRelationName(browser):
     """
     timeId=str(intTime(1000))
     while True:
-        if userOption["query relation name"]:
+        if getConfig("query relation name"):
             suffix=getOnlyText(_("Name of the relation:"), default=timeId)
             if suffix=="":
                 return None
         else:
             suffix=timeId
-        relation = userOption["current tag prefix"]+suffix
+        relation = getConfig("current tag prefix")+suffix
         if len(getNidsFromRelation(relation))>0:
             confirm= askUser(f"A relation called {relation} already exists. Do you want to add the selected notes to this relation ?", defaultno=True, parent=browser)
             if confirm is True:
@@ -75,7 +75,7 @@ def createRelationName(browser):
 def queryRelated(relations):
     query =" or ".join([f"tag:{relation}" for relation in relations])
     debug(f"Query from relations {relations} is {query}")
-    return query 
+    return query
 
 def getNidsFromRelation(relation):
     nids=getNidsFromRelations([relation])
@@ -92,6 +92,7 @@ def getNidsFromRelations(relations):
     nids= set(finder.findNotes(queryRelated(relations)))
     debug(f"from relations {relations} we get nids {nids}")
     return nids
+
 def getNotesFromRelations(relations):
     notes={Note(mw.col, id=nid) for nid in getNidsFromRelations(relations)}
     debug(f"from relations {relations} we get notes {notes}")
