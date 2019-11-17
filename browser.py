@@ -5,13 +5,15 @@
 # Source in https://github.com/Arthur-Milchior/anki-relation
 # Addon number 413416269  https://ankiweb.net/shared/info/413416269
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+import aqt
+from anki.hooks import addHook
 
 from . import merge
-from .utils import getRelationsFromNotes, queryRelated, getSelectedNotes
-from anki.hooks import addHook
-import aqt
+from .utils import getRelationsFromNotes, getSelectedNotes, queryRelated
+
 
 def searchRelationsInBrowser(relations):
     browser = aqt.dialogs.open("Browser", aqt.mw)
@@ -33,4 +35,3 @@ def setupMenu(browser):
         browser.form.menuEdit.addAction(a)
 
 addHook("browser.setupMenus", setupMenu)
-

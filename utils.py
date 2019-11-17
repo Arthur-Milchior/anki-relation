@@ -5,12 +5,14 @@
 # Source in https://github.com/Arthur-Milchior/anki-relation
 # Addon number 413416269  https://ankiweb.net/shared/info/413416269
 
-from .config import getConfig
-from aqt.utils import getOnlyText, askUser
-from anki.utils import intTime
 from anki.find import Finder
 from anki.notes import Note
+from anki.utils import intTime
 from aqt import mw
+from aqt.utils import askUser, getOnlyText
+
+from .config import getConfig
+
 
 def debug(s):
     #print(s)

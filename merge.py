@@ -5,8 +5,11 @@
 # Source in https://github.com/Arthur-Milchior/anki-relation
 # Addon number 413416269  https://ankiweb.net/shared/info/413416269
 
-from .utils import createRelationName, getRelationsFromNotes, getNotesFromRelations, getSelectedNotes, debug
 from aqt.utils import tooltip
+
+from .utils import (createRelationName, debug, getNotesFromRelations,
+                    getRelationsFromNotes, getSelectedNotes)
+
 
 def createRelationBrowser(browser,relation=None):
     notes = getSelectedNotes(browser)
@@ -67,4 +70,3 @@ def mergeRelations(browser):
         for relation in relations:
             note.delTag(relation)
     createRelation(relatedNotes,browser)
-

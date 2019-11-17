@@ -5,11 +5,13 @@
 # Source in https://github.com/Arthur-Milchior/anki-relation
 # Addon number 413416269  https://ankiweb.net/shared/info/413416269
 
-#from  anki/sched.py  and anki/schedv2.py
-from anki.utils import ids2str, intTime
 from anki.sched import Scheduler
 from anki.schedv2 import Scheduler as Scheduler2
-from .utils import getNidsFromRelation, debug
+#from  anki/sched.py  and anki/schedv2.py
+from anki.utils import ids2str, intTime
+
+from .utils import debug, getNidsFromRelation
+
 
 def debug(*args,**kwargs):
         #print(*args,**kwargs)
