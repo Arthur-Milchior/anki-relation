@@ -20,18 +20,21 @@ def searchRelationsInBrowser(relations):
     browser.form.searchEdit.lineEdit().setText(queryRelated(relations))
     browser.onSearchActivated()
 
+
 def searchRelatedNotesInBrowser(browser):
     searchRelationsInBrowser(getRelationsFromNotes(getSelectedNotes(browser)))
 
-def setupMenu(browser):
-        a=QAction("See related notes",browser)
-        a.setShortcut(QKeySequence("Ctrl+Shift+Alt+E"))
-        a.triggered.connect(lambda : searchRelatedNotesInBrowser(browser))
-        browser.form.menuEdit.addAction(a)
 
-        a=QAction("Create a relation",browser)
-        a.setShortcut(QKeySequence("Ctrl+Alt+E"))
-        a.triggered.connect(lambda :merge.createRelationBrowser(browser))
-        browser.form.menuEdit.addAction(a)
+def setupMenu(browser):
+    a = QAction("See related notes", browser)
+    a.setShortcut(QKeySequence("Ctrl+Shift+Alt+E"))
+    a.triggered.connect(lambda: searchRelatedNotesInBrowser(browser))
+    browser.form.menuEdit.addAction(a)
+
+    a = QAction("Create a relation", browser)
+    a.setShortcut(QKeySequence("Ctrl+Alt+E"))
+    a.triggered.connect(lambda: merge.createRelationBrowser(browser))
+    browser.form.menuEdit.addAction(a)
+
 
 addHook("browser.setupMenus", setupMenu)

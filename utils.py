@@ -15,18 +15,20 @@ from .config import getConfig
 
 
 def debug(s):
-    #print(s)
+    # print(s)
     pass
+
 
 def getRelationsFromNote(self):
     relations = set()
     for relation in self.tags:
         for prefix in getConfig("tag prefixes"):
             if relation.startswith(prefix):
-                relations.add(relation)#[len(prefix):])
+                relations.add(relation)  # [len(prefix):])
                 break
     debug(f"The relations from note {self.id} are {relations}")
     return relations
+
 
 def removeRelationsFromNote(self):
     for tag in self.tags:
@@ -37,12 +39,15 @@ def removeRelationsFromNote(self):
                 break
 
 
-Note.getRelations=getRelationsFromNote
-Note.removeRelations=removeRelationsFromNote
+Note.getRelations = getRelationsFromNote
+Note.removeRelations = removeRelationsFromNote
+
 
 def getRelationsFromNids(nids):
-    notes=[Note(mw.col,id=nid) for nid in nids]
+    notes = [Note(mw.col, id=nid) for nid in nids]
     return getRelationsFromNotes(notes)
+
+
 def getRelationsFromNotes(notes):
     relations = set()
     for note in notes:
@@ -50,23 +55,24 @@ def getRelationsFromNotes(notes):
     debug(f"The relations from notes {notes} are {relations}")
     return relations
 
+
 def createRelationName(browser):
     """A tag, from current prefix and an id. Or None
 
     Id is either a time stamp or asked to user.
     None if the user cancel.
     """
-    timeId=str(intTime(1000))
+    timeId = str(intTime(1000))
     while True:
         if getConfig("query relation name"):
-            suffix=getOnlyText(_("Name of the relation:"), default=timeId)
-            if suffix=="":
+            suffix = getOnlyText(_("Name of the relation:"), default=timeId)
+            if suffix == "":
                 return None
         else:
-            suffix=timeId
-        relation = getConfig("current tag prefix")+suffix
-        if len(getNidsFromRelation(relation))>0:
-            confirm= askUser(f"A relation called {relation} already exists. Do you want to add the selected notes to this relation ?", defaultno=True, parent=browser)
+            suffix = timeId
+        relation = getConfig("current tag prefix", "relation_")+suffix
+        if len(getNidsFromRelation(relation)) > 0:
+            confirm = askUser(f"A relation called {relation} already exists. Do you want to add the selected notes to this relation ?", defaultno=True, parent=browser)
             if confirm is True:
                 break
         else:
@@ -74,35 +80,41 @@ def createRelationName(browser):
     debug(f"The new relation name is {relation}")
     return relation
 
+
 def queryRelated(relations):
-    query =" or ".join([f"tag:{relation}" for relation in relations])
+    query = " or ".join([f"tag:{relation}" for relation in relations])
     debug(f"Query from relations {relations} is {query}")
     return query
 
+
 def getNidsFromRelation(relation):
-    nids=getNidsFromRelations([relation])
+    nids = getNidsFromRelations([relation])
     debug(f"from relation {relation} we get nids {nids}")
-    return  nids
+    return nids
+
 
 def getNotesFromRelation(relation):
-    notes={Note(mw.col, id=nid) for nid in getNidsFromRelation(relation)}
+    notes = {Note(mw.col, id=nid) for nid in getNidsFromRelation(relation)}
     debug(f"from relation {relation} we get notes {notes}")
     return nids
 
+
 def getNidsFromRelations(relations):
     finder = Finder(mw.col)
-    nids= set(finder.findNotes(queryRelated(relations)))
+    nids = set(finder.findNotes(queryRelated(relations)))
     debug(f"from relations {relations} we get nids {nids}")
     return nids
 
+
 def getNotesFromRelations(relations):
-    notes={Note(mw.col, id=nid) for nid in getNidsFromRelations(relations)}
+    notes = {Note(mw.col, id=nid) for nid in getNidsFromRelations(relations)}
     debug(f"from relations {relations} we get notes {notes}")
     return notes
 
+
 def getSelectedNotes(browser):
-        nids=browser.selectedNotes()
-        debug(f"Selected nids are {nids}")
-        notes={Note(mw.col,id=nid) for nid in nids}
-        debug(f"Selected notes are {notes}")
-        return notes
+    nids = browser.selectedNotes()
+    debug(f"Selected nids are {nids}")
+    notes = {Note(mw.col, id=nid) for nid in nids}
+    debug(f"Selected notes are {notes}")
+    return notes
