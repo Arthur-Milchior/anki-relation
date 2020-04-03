@@ -1,3 +1,3 @@
-current tag prefix: The prefix used to create new relation using note's tag.
-tag prefixes: the list of words, such that if a tag is prefixed by those words, it means we should consider them in this add-on. Note that the add-on will always add the «current tag prefix» in it.
-query relation name: by default, the suffix of the tag is a timestamp. If this value is set to true, when you create a relation, the add-on will ask you to give a name to it. It will take more time, but it may be easier to know what a relation represents.
+* current tag prefix: This is the prefix used in new relation tags.
+* query relation name: by default (false), the suffix of the tag is a timestamp. If this value is set to true, when you create a relation, the add-on will prompt you to give it a custom suffix to be used in place of a timestamp. Creating relations takes more time this way, but it may be worth the convenience of knowing what a relation represents.
+* tag prefixes: the list of word prefixes that will be recognized as relations by the add-on. Note that a new «current tag prefix» will be added automatically.
