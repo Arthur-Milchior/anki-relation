@@ -6,5 +6,3 @@ Creating relations takes more time this way, but it may be worth the convenience
 
 tag prefixes: the list of word prefixes that will be recognized as relations by the add-on.
 Note that a new «current tag prefix» will be added automatically.
-
-NB: for changes to go into effect, please restart Anki.
