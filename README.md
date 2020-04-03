@@ -1,13 +1,17 @@
-Allow to create a new kind of relations between notes. Burying sibling cards will now also bury cards of related note. This only work on computer, not on ios, android or ankiweb.
+Allow to create a new kind of relations between notes.
+Burying sibling cards will now also bury cards of related note.
+This only work on computer, not on ios, android or ankiweb.
 
-To «relate» notes, in the browser, select each note you want in your new relation, and then press Ctrl+Alt+E (or edit>create a relation). A new relation will be created.
+To «relate» notes, in the browser, select each note you want in your new relation, and then press Ctrl+Alt+E (or edit>create a relation).
+A new relation will be created.
 
 To delete a relation r, just delete the tag relation_r.
 
 To see all cards related to some note, select this note in the browser, and do (edit>see related notes), or Ctrl+Alt+Shift+E.
 
 ## Notes in multiple relations
-A note may belong to multiple relation. If a card of this note is seen, all cards of all of its relations will be buried. If you select a card belonging to three relations and then click on merge, the three relations will be merged.
+A note may belong to multiple relation. If a card of this note is seen, all cards of all of its relations will be buried.
+If you select a card belonging to three relations and then click on merge, the three relations will be merged.
 
 ## Interaction with "Copy note"
 You can use add-on
@@ -16,7 +20,10 @@ cards. You can configure the add-on in order that a note and its copy
 get related.
 
 ### Configuration
-Two notes are related if they have a tag of the form relation_xxxxxxxx, with the same value for xxxxx. You can change "relation_" to any other prefix in the add-ons configuration. By default, xxxxx is a random value. You can choose a meaningful value. In athe add-ons configuration switch "query relation name" to true, then when you create a relation, anki will prompt you to enter the relation's name.
+Two notes are related if they have a tag of the form relation_xxxxxxxx, with the same value for xxxxx.
+You can change "relation_" to any other prefix in the add-ons configuration. By default, xxxxx is a random value.
+You can choose a meaningful value.
+In athe add-ons configuration switch "query relation name" to true, then when you create a relation, anki will prompt you to enter the relation's name.
 
 ### TODO
 
@@ -26,7 +33,8 @@ Add a button to remove notes from relation.
 
 Add an option to add a single card to a relation, instead of an entire note.
 
-If you want to merge multiple relations into a single one, select at least one note from each relation and click on (note >merge the selected relations). If a note has no relation, it will just be added to this new relation.
+If you want to merge multiple relations into a single one, select at least one note from each relation and click on (note >merge the selected relations).
+If a note has no relation, it will just be added to this new relation.
 
 Key         |Value
 ------------|-------------------------------------------------------------------
